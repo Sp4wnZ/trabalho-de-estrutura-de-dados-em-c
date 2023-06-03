@@ -2,13 +2,13 @@
 #include <stdlib.h>
 
 
-struct StackNode{
+struct StackNode {
     int data;
     struct StackNode* next;
 };
 
 
-struct StackNode* createStackNode(int data){
+struct StackNode* createStackNode(int data) {
     struct StackNode* newNode = (struct StackNode*)malloc(sizeof(struct StackNode));
     newNode->data = data;
     newNode->next = NULL;
@@ -18,28 +18,28 @@ struct StackNode* createStackNode(int data){
 
 void push(struct StackNode** top, int data) {
     struct StackNode* newNode = createStackNode(data);
-    newNode->next=*top;
+    newNode->next = *top;
     *top = newNode;
 }
 
 
-int pop(struct StackNode** top){
-    if (*top == NULL){
+int pop(struct StackNode** top) {
+    if (*top == NULL) {
         printf("Pilha vazia.\n");
         return -1;
     }
-    struct StackNode* temp=*top;
-    int data=temp->data;
-    *top=(*top)->next;
+    struct StackNode* temp = *top;
+    int data = temp->data;
+    *top = (*top)->next;
     free(temp);
     return data;
 }
 
 
-void printStack(struct StackNode* top){
-    printf("Pilha:");
+void printStack(struct StackNode* top) {
+    printf("Pilha: ");
     while (top != NULL) {
-        printf("%d ",top->data);
+        printf("%d ", top->data);
         top = top->next;
     }
     printf("\n");
@@ -48,7 +48,7 @@ void printStack(struct StackNode* top){
 
 void clearStack(struct StackNode** top) {
     while (*top != NULL) {
-        struct StackNode* temp =*top;
+        struct StackNode* temp = *top;
         *top = (*top)->next;
         free(temp);
     }
@@ -57,9 +57,9 @@ void clearStack(struct StackNode** top) {
 
 
 void printTop(struct StackNode* top) {
-    if (top == NULL){
+    if (top == NULL) {
         printf("Pilha vazia.\n");
-    }else{
+    } else {
         printf("Topo da Pilha: %d\n", top->data);
     }
 }
@@ -67,39 +67,39 @@ void printTop(struct StackNode* top) {
 
 struct QueueNode {
     int data;
-    struct QueueNode*next;
+    struct QueueNode* next;
 };
 
 struct Queue {
-    struct QueueNode*front;
-    struct QueueNode*rear;
+    struct QueueNode* front;
+    struct QueueNode* rear;
 };
 
 
-struct Queue* createQueue(){
-    struct Queue* queue=(struct Queue*)malloc(sizeof(struct Queue));
-    queue->front=NULL;
-    queue->rear=NULL;
+struct Queue* createQueue() {
+    struct Queue* queue = (struct Queue*)malloc(sizeof(struct Queue));
+    queue->front = NULL;
+    queue->rear = NULL;
     return queue;
 }
 
 
 void enqueue(struct Queue* queue, int data) {
     struct QueueNode* newNode = (struct QueueNode*)malloc(sizeof(struct QueueNode));
-    newNode->data =data;
-    newNode->next=NULL;
-    if(queue->rear == NULL) {
+    newNode->data = data;
+    newNode->next = NULL;
+    if (queue->rear == NULL) {
         queue->front = newNode;
         queue->rear = newNode;
-    }else{
-        queue->rear->next=newNode;
-        queue->rear=newNode;
+    } else {
+        queue->rear->next = newNode;
+        queue->rear = newNode;
     }
 }
 
 
 int dequeue(struct Queue* queue) {
-    if (queue->front==NULL) {
+    if (queue->front == NULL) {
         printf("Fila vazia.\n");
         return -1;
     }
@@ -116,9 +116,9 @@ int dequeue(struct Queue* queue) {
 
 void printQueue(struct Queue* queue) {
     struct QueueNode* current = queue->front;
-    printf("Fila:");
+    printf("Fila: ");
     while (current != NULL) {
-        printf("%d", current->data);
+        printf("%d ", current->data);
         current = current->next;
     }
     printf("\n");
@@ -126,8 +126,8 @@ void printQueue(struct Queue* queue) {
 
 
 void clearQueue(struct Queue* queue) {
-    while (queue->front != NULL){
-        struct QueueNode* temp =queue->front;
+    while (queue->front != NULL) {
+        struct QueueNode* temp = queue->front;
         queue->front = queue->front->next;
         free(temp);
     }
@@ -136,11 +136,11 @@ void clearQueue(struct Queue* queue) {
 }
 
 
-int findMaxQueue(struct Queue* queue){
+int findMaxQueue(struct Queue* queue) {
     int max = -1;
     struct QueueNode* current = queue->front;
     while (current != NULL) {
-        if (current->data > max){
+        if (current->data > max) {
             max = current->data;
         }
         current = current->next;
@@ -154,21 +154,21 @@ int findMaxQueue(struct Queue* queue){
 }
 
 
-int findMinQueue(struct Queue* queue){
+int findMinQueue(struct Queue* queue) {
     int min = -1;
-    struct QueueNode* current =queue->front;
-    if (current == NULL){
+    struct QueueNode* current = queue->front;
+    if (current == NULL) {
         printf("Fila vazia.\n");
         return min;
     }
     min = current->data;
     while (current != NULL) {
-        if (current->data < min){
+        if (current->data < min) {
             min = current->data;
         }
         current = current->next;
     }
-    printf("Menor elemento da Fila: %d\n",min);
+    printf("Menor elemento da Fila: %d\n", min);
     return min;
 }
 
@@ -180,7 +180,7 @@ struct TreeNode {
 };
 
 
-struct TreeNode* createTreeNode(int data){
+struct TreeNode* createTreeNode(int data) {
     struct TreeNode* newNode = (struct TreeNode*)malloc(sizeof(struct TreeNode));
     newNode->data = data;
     newNode->left = NULL;
@@ -189,10 +189,10 @@ struct TreeNode* createTreeNode(int data){
 }
 
 
-struct TreeNode* insert(struct TreeNode* root, int data){
-    if (root == NULL){
+struct TreeNode* insert(struct TreeNode* root, int data) {
+    if (root == NULL) {
         root = createTreeNode(data);
-    } else if (data <= root->data){
+    } else if (data <= root->data) {
         root->left = insert(root->left, data);
     } else {
         root->right = insert(root->right, data);
@@ -201,18 +201,18 @@ struct TreeNode* insert(struct TreeNode* root, int data){
 }
 
 
-struct TreeNode* search(struct TreeNode* root, int data){
+struct TreeNode* search(struct TreeNode* root, int data) {
     if (root == NULL || root->data == data) {
         return root;
     }
-    if (data<root->data) {
+    if (data < root->data) {
         return search(root->left, data);
     }
     return search(root->right, data);
 }
 
- (esquerda, raiz, direita)
-void inorder(struct TreeNode* root){
+
+void inorder(struct TreeNode* root) {
     if (root != NULL) {
         inorder(root->left);
         printf("%d ", root->data);
@@ -221,7 +221,7 @@ void inorder(struct TreeNode* root){
 }
 
 
-void printRightRootLeft(struct TreeNode* root){
+void printRightRootLeft(struct TreeNode* root) {
     if (root != NULL) {
         printRightRootLeft(root->right);
         printf("%d ", root->data);
@@ -230,18 +230,18 @@ void printRightRootLeft(struct TreeNode* root){
 }
 
 
-int findMax(struct TreeNode* root){
+int findMax(struct TreeNode* root) {
     if (root == NULL) {
         printf("Árvore vazia.\n");
         return -1;
     }
-    if (root->right == NULL){
+    if (root->right == NULL) {
         return root->data;
     }
     return findMax(root->right);
 }
 
-int main(){
+int main() {
     int opcao;
     int data;
     struct StackNode* stackTop = NULL;
@@ -257,7 +257,7 @@ int main(){
         printf("Opção: ");
         scanf("%d", &opcao);
 
-        switch (opcao){
+        switch (opcao) {
             case 1:
                 do {
                     printf("\nEscolha uma opção:\n");
@@ -270,7 +270,7 @@ int main(){
                     printf("Opção: ");
                     scanf("%d", &opcao);
 
-                    switch (opcao){
+                    switch (opcao) {
                         case 1:
                             printf("Digite o elemento a ser empilhado: ");
                             scanf("%d", &data);
@@ -298,7 +298,7 @@ int main(){
                             printf("Opção inválida.\n");
                             break;
                     }
-                }while (opcao != 6);
+                }while(opcao != 6);
                 break;
             case 2:
                 do {
@@ -313,9 +313,9 @@ int main(){
                     printf("Opção: ");
                     scanf("%d", &opcao);
 
-                    switch (opcao){
+                    switch (opcao) {
                         case 1:
-                            printf("Digite o elemento a ser enfileirado:");
+                            printf("Digite o elemento a ser enfileirado: ");
                             scanf("%d", &data);
                             enqueue(queue, data);
                             printf("Elemento enfileirado com sucesso.\n");
@@ -358,9 +358,9 @@ int main(){
                     printf("Opção: ");
                     scanf("%d", &opcao);
 
-                    switch (opcao) {
+                    switch(opcao){
                         case 1:
-                            printf("Digite o elemento a ser inserido:");
+                            printf("Digite o elemento a ser inserido: ");
                             scanf("%d", &data);
                             root = insert(root, data);
                             printf("Elemento inserido na Árvore Binária.\n");
@@ -397,7 +397,7 @@ int main(){
                             printf("Opção inválida.\n");
                             break;
                     }
-                }while (opcao != 6);
+                }while(opcao != 6);
                 break;
             case 4:
                 printf("Encerrando o programa.\n");
